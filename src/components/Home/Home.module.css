@@ -1,18 +1,17 @@
 /* Home.module.css */
 .home_container {
-    display: flex;
-    height: 100%;
-    backdrop-filter: blur(10px);
-    margin: 0 10px;
-    
-    & .sidebar {
-      flex: 0 0 250px; /* Ajusta el ancho de la barra lateral según tus necesidades */
-      /* Agrega otros estilos para la barra lateral según sea necesario */
-    }
+  display: flex;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  margin: 0 10px;
 
-    & .cards_container {
-        height: 90vh;
-        width: 100%;
-    }
+  & .sidebar {
+    flex: 0 0 250px;
+  }
+
+  & .cards_container {
+    height: 90vh;
+    width: 100%;
+  }
 
 }

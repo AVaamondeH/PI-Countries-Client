@@ -147,11 +147,9 @@ const UpdateActivity = () => {
 
   const handleClickDisable = () => {
 
-    console.log("Button clicked!");
-      // // Realizar cualquier acción que desees aquí
       const error = validate(null, null, activity, duration)
 
-      if (!Object.keys(error).length) { //se verifica si el error tiene o no propiedades para proceder a setear nuevamente el error en un objeto vacio
+      if (!Object.keys(error).length) {
 
         setErrors({});
         return;
@@ -164,11 +162,8 @@ const UpdateActivity = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Aquí puedes enviar los datos al backend mediante una solicitud POST
-      // Por ejemplo:
       const response = await axios.put('http://127.0.0.1:3001/activities', activity);
       console.log('Activity created successfully:', response.data);
-      
       
       setShowPopup({
         ...showPopup,
@@ -189,14 +184,13 @@ const UpdateActivity = () => {
         error: true
       });
   
-      // Ocultar el pop-up después de mostrar el mensaje de error
       setTimeout(() => {
         setShowPopup({
           ...showPopup,
           popup: false,
           error: false,
         });
-      }, 3000); // Mostrar el mensaje de error durante 3 segundos
+      }, 3000);
     }
   };
 
@@ -219,7 +213,6 @@ const UpdateActivity = () => {
   const onInputValidations = (event) => {
     const { name, value } = event.target;
     const error = validate(name, value, duration)
-    console.log(name);
     if (!(name in error)) { 
       setErrors({
         ...errors,
@@ -250,10 +243,10 @@ const UpdateActivity = () => {
     <div className={style.container}>
       {render.show 
       ? (
-          <form onSubmit={handleSubmit} className={style.form_container}>
-            <h2>Update an activity!</h2>
-            <p>Fields with * cannot be empty</p>
-            <select
+        <form onSubmit={handleSubmit} className={style.form_container}>
+        <h2>Update an activity!</h2>
+        <p>Fields with * cannot be empty</p>
+        <select
               name="activity"
               className={style.select_activity}
               value={render.selectedActivity}
@@ -266,14 +259,17 @@ const UpdateActivity = () => {
                 )
               })}
             </select>
-
+        <div className={style.form_inside}>
+          <div className={style.leftContainer}>
             <label>
               Name: *
+              <br />
               <input
                 name='name'
                 type="text"
                 value={activity.name}
                 onChange={handleChange}
+                onInput={onInputValidations}
               />
               <div className={style.error_container}>
                 {errors.name && <p>{errors.name}</p>}
@@ -286,10 +282,11 @@ const UpdateActivity = () => {
                 type="number"
                 name="difficulty"
                 value={activity.difficulty}
+
                 onChange={handleChange}
               >
-                <option value="" disabled> Select difficulty</option>
-                <option value="1">⭐ ✰ ✰ ✰ ✰</option>
+                <option value="" disabled> Select difficulty </option>
+                <option value="1" onInput={onInputValidations}>⭐ ✰ ✰ ✰ ✰</option>
                 <option value="2">⭐⭐ ✰ ✰ ✰</option>
                 <option value="3">⭐⭐⭐ ✰ ✰</option>
                 <option value="4">⭐⭐⭐⭐ ✰</option>
@@ -322,10 +319,12 @@ const UpdateActivity = () => {
                 onInput={onInputDuration}
                 placeholder='00' />
               <br />
-              <div className={style.error_container}>
-                {errors.duration && <p>{errors.duration}</p>}
-              </div>
             </label>
+            <div className={style.error_container}>
+              {errors.hours && <p>{errors.hours}</p>}
+              {errors.minutes && <p>{errors.minutes}</p>}
+              {errors.duration && <p>{errors.duration}</p>}
+            </div>
             <br />
             <label>
               Season: *
@@ -344,7 +343,9 @@ const UpdateActivity = () => {
                 {errors.season && <p>{errors.season}</p>}
               </div>
             </label>
-            <br />
+          </div>
+
+          <div className={style.rightContainer}>
             <label>
               Select countries:
               <input
@@ -391,23 +392,23 @@ const UpdateActivity = () => {
               </div>
             )}
             {selectedCountries.length > 0 &&
-              (console.log(selectedCountries),
-                <div className={style.selected_countries}>
-                  {selectedCountries.map((country) => (
-                    <button
-                      key={country.id}
-                      type="button"
-                      onClick={() => removeCountry(country)}
-                    >
-                      <span>
-                        {country.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
+              (<div className={style.selected_countries}>
+                {selectedCountries.map((country) => (
+                  <button
+                    key={country.id}
+                    type="button"
+                    onClick={() => removeCountry(country)}
+                  >
+                    <span>
+                      {country.name}
+                    </span>
+                  </button>
+                ))}
+              </div>
               )}
-            <br />
-            <div className={style.disableDiv}>
+          </div>
+        </div>
+        <div className={style.disableDiv}>
           <div
             className={style.disableClick}
             onClick={handleClickDisable}
@@ -434,7 +435,7 @@ const UpdateActivity = () => {
 
           </button>
         </div>
-          </form>
+      </form>
           
       )
       : (

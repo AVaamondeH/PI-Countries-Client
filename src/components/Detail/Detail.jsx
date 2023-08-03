@@ -16,22 +16,17 @@ const Detail = () => {
     showNotification: false
   });
 
-
-
   useEffect(() => {
     const getDetail = async (id) => {
       const { data } = await axios(`http://127.0.0.1:3001/countries/${id}`)
-      console.log(data);
-
-      if (!data.name) {
+      if (!data.data.name) {
         return setCountry({});
       }
 
-      setCountry(data);
+      setCountry(data.data);
     }
     getDetail(id)
   }, [id]);
-
 
   // ! Handlers
   const handleDeleteActivity = () => {
@@ -42,12 +37,9 @@ const Detail = () => {
   }
 
   const handleConfirmDelete = async (activityId) => {
-    // Lógica para eliminar la actividad
-    // ...
     try {
-      const { data } = await axios.delete(`http://127.0.0.1:3001/activities?activityId=${activityId}&countryId=${id}`)
-      console.log(data);
-      // Ocultar el pop-up después de eliminar
+      await axios.delete(`http://127.0.0.1:3001/activities?activityId=${activityId}&countryId=${id}`)
+
       setShowPopup({
         ...showPopup,
         success: true,
@@ -60,9 +52,8 @@ const Detail = () => {
           success: false,
           popup: false
         });
-      }, 5000);
-
-      window.location.reload();
+        window.location.reload();
+      }, 2000);
 
     } catch (error) {
       console.error('Error deleting activity:', error);
@@ -71,29 +62,24 @@ const Detail = () => {
         error: true
       });
 
-      // Ocultar el pop-up después de mostrar el mensaje de error
       setTimeout(() => {
         setShowPopup({
           ...showPopup,
           popup: false,
           error: false,
         });
-      }, 3000); // Mostrar el mensaje de error durante 3 segundos
+      }, 3000);
     }
   };
 
   const handleCancelDelete = () => {
-    // Cancelar la eliminación, ocultar el pop-up
-    console.log(showPopup);
     setShowPopup({
       ...showPopup,
       popup: false
     });
   };
-  console.log(country);
 
-
-
+// * Render
   return (
     <div className={style.container}>
       <div className={style.details}>
@@ -109,6 +95,8 @@ const Detail = () => {
           <h3>Population: {country?.population}</h3>
         </div>
       </div>
+
+      {/*Activities Render*/}
       <div>
         {country?.Activities ? (
           <div className={style.activities_container}>
@@ -125,16 +113,17 @@ const Detail = () => {
                     <button onClick={() => handleDeleteActivity()}>Delete Activity</button>
                   </div>
                 </div>
-                {/* Confirmation Pop-up */}
+
+                {/* Confirmation Pop-up if delete*/}
                 {showPopup.popup && (
                   <Popup
                     key={id}
                     message="You're sure want to delete this activity from this country? This action is irreversible"
                     onConfirm={() => handleConfirmDelete(id)}
                     onCancel={() => handleCancelDelete()}
-                    successMessage= "Aceptar" 
-                    cancelMessage= "Cancelar"
-                    toHome= {false}
+                    successMessage="Aceptar"
+                    cancelMessage="Cancelar"
+                    toHome={false}
                   />
                 )}
                 {/* Notification */}

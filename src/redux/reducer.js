@@ -37,12 +37,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 allCountries: action.payload,
             };
+
         case GET_ASSOCIATIONS:
             return {
                 ...state,
                 associations: action.payload,
             };
-
 
         case UPDATE_FILTERS:
             return {
@@ -56,17 +56,10 @@ const reducer = (state = initialState, action) => {
                 currentPage: action.payload,
             };
 
-
         default:
             return { ...state }
     }
 }
 
 export default reducer;
-
-
-
-
-
-
 

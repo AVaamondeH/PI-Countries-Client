@@ -1,4 +1,4 @@
-import style from  "./Landing.module.css"
+import style from "./Landing.module.css"
 import { NavLink } from "react-router-dom"
 
 

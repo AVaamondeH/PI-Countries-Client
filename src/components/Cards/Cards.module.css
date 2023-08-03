@@ -10,7 +10,7 @@
         flex-grow: 1;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between; /* Ajusta el espaciado entre las cards */
+        justify-content: space-between;
     }
 
     & .searchbar {
@@ -24,33 +24,33 @@
         justify-content: center;
         margin: 20px 0;
 
-            & button {
-                margin: 0 5px;
-                cursor: pointer;
-                border-radius: 5px;
-                font-family: Georgia;
-                color: #ffffff;
-                font-size: 20px;
-                background: linear-gradient(to bottom right, #352f444e, #352f4467);
-                padding: 7px 15px 7px 15px;
-                border: solid #ffffff 2px;
-                text-decoration: none;
+        & button {
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: Georgia;
+            color: #ffffff;
+            font-size: 20px;
+            background: linear-gradient(to bottom right, #352f444e, #352f4467);
+            padding: 7px 15px 7px 15px;
+            border: solid #ffffff 2px;
+            text-decoration: none;
 
-                &:disabled {
-                    background: #dbd8e3;
-                    color: rgb(100, 100, 100);
-                    cursor: not-allowed;
-                    border: solid #000000 2px;
-                }
-                
-                &:not(:disabled):hover {
-                    border: solid #000000 2px;
-                    color: black;
-                    background: #dbd8e3;
-                    text-decoration: none;
-                }
-            }          
-    }   
+            &:disabled {
+                background: #dbd8e3;
+                color: rgb(100, 100, 100);
+                cursor: not-allowed;
+                border: solid #000000 2px;
+            }
+
+            &:not(:disabled):hover {
+                border: solid #000000 2px;
+                color: black;
+                background: #dbd8e3;
+                text-decoration: none;
+            }
+        }
+    }
 }
 
 .noActivity {

@@ -36,12 +36,10 @@ function DeleteActivity() {
     }
 
     const handleConfirmDelete = async (activityId) => {
-        // Lógica para eliminar la actividad
-        // ...
         try {
-            const { data } = await axios.delete(`http://127.0.0.1:3001/activities?activityId=${activityId}`)
-            console.log(data);
-            // Ocultar el pop-up después de eliminar
+
+            await axios.delete(`http://127.0.0.1:3001/activities?activityId=${activityId}`)
+
             setShowPopup({
                 ...showPopup,
                 success: true,
@@ -54,9 +52,9 @@ function DeleteActivity() {
                     success: false,
                     popup: false
                 });
-            }, 3000);
-            
-            window.location.reload();
+                window.location.reload();
+            }, 2000);
+
 
         } catch (error) {
             console.error('Error deleting activity:', error);
@@ -65,73 +63,73 @@ function DeleteActivity() {
                 error: true
             });
 
-            // Ocultar el pop-up después de mostrar el mensaje de error
             setTimeout(() => {
                 setShowPopup({
                     ...showPopup,
                     popup: false,
                     error: false,
                 });
-            }, 3000); // Mostrar el mensaje de error durante 3 segundos
+            }, 3000);
         }
     };
 
     const handleCancelDelete = () => {
-        // Cancelar la eliminación, ocultar el pop-up
-        console.log(showPopup);
         setShowPopup({
             ...showPopup,
             popup: false
         });
     };
 
-
-
+    // * Render
     return (
-        <div className={style.container}>
-            <div className={style.activities_container}>
-                {activities.map(({ id, name, difficulty, duration, season }) => (
-                    <div key={id} className={style.activity_containerCard}>
-                        <div className={style.activity_card}>
-                            <h3 className={style.activity_name}>{name}</h3>
-                            <div className={style.activity_detail}>
-                                <p>Difficulty: {difficulty}</p>
-                                <p>Duration: {duration}</p>
-                                <p>Season: {season}</p>
+        <>
+            <div className={style.container}>
+                <div className={style.activities_container}>
+                    {activities.map(({ id, name, difficulty, duration, season }) => (
+                        <div key={id} className={style.activity_containerCard}>
+                            <div className={style.activity_card}>
+                                <h3 className={style.activity_name}>{name}</h3>
+                                <div className={style.activity_detail}>
+                                    <p>Difficulty: {difficulty}</p>
+                                    <p>Duration: {duration}</p>
+                                    <p>Season: {season}</p>
+                                </div>
+                                <div className={style.delete}>
+                                    <button onClick={() => handleDeleteActivity()}>Delete Activity</button>
+                                </div>
                             </div>
-                            <div className={style.delete}>
-                                <button onClick={() => handleDeleteActivity()}>Delete Activity</button>
-                            </div>
+
+                            {/* Confirmation Pop-up */}
+                            {showPopup.popup && (
+                                <Popup
+                                    key={id}
+                                    message="You're sure want to delete this activity? This will delete this activity from all countries."
+                                    onConfirm={() => handleConfirmDelete(id)}
+                                    onCancel={() => handleCancelDelete()}
+                                    successMessage="Aceptar"
+                                    cancelMessage="Cancelar"
+                                    toHome={false}
+                                />
+                            )}
+
+                            {/* Notification */}
+                            {showPopup.success && (
+                                <SuccessMessage
+                                    message="Activity deleted successfully!."
+                                />
+                            )}
+                            {showPopup.error && (
+                                <ErrorMessage
+                                    message="Error deleting activity. Please try again later."
+                                />
+                            )}
                         </div>
-                        {/* Confirmation Pop-up */}
-                        {showPopup.popup && (
-                            <Popup
-                                key={id}
-                                message="You're sure want to delete this activity? This will delete this activity from all countries."
-                                onConfirm={() => handleConfirmDelete(id)}
-                                onCancel={() => handleCancelDelete()}
-                                successMessage="Aceptar"
-                                cancelMessage="Cancelar"
-                                toHome={false}
-                            />
-                        )}
-                        {/* Notification */}
-                        {showPopup.success && (
-                            <SuccessMessage
-                                message="Activity deleted successfully!."
-                            />
-                        )}
-                        {showPopup.error && (
-                            <ErrorMessage
-                                message="Error deleting activity. Please try again later."
-                            />
-                        )}
-                    </div>
-                ))}
+                    ))}
+                </div>
+
             </div>
 
-        </div>
-    );
+        </>);
 }
 
 export default DeleteActivity;

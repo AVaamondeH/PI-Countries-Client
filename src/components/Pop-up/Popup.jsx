@@ -9,13 +9,14 @@ const ConfirmationPopup = ({ message, onConfirm, onCancel, successMessage, cance
                 <div className={style.text}>
                     <p>{message}</p>
                 </div>
-
                 {toHome
                     ? (
-                        <NavLink className={style.buttons} to="/home">
-                            <button onClick={onConfirm}>{successMessage}</button>
+                        <div className={style.buttons}>
+                            <NavLink to="/home">
+                                <button onClick={onConfirm}>{successMessage}</button>
+                            </NavLink>
                             <button onClick={onCancel}>{cancelMessage}</button>
-                        </NavLink>
+                        </div>
                     )
                     : (
                         <div className={style.buttons}>

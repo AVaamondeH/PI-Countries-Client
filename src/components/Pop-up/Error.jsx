@@ -8,7 +8,6 @@ const ErrorMessage = ({message}) => {
                 <div className={style.text}>
                     <p>{message}</p>
                 </div>
-
             </div>
         </div>
     )

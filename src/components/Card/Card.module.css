@@ -29,6 +29,7 @@
             max-height: 150px;
             object-fit: cover;
             border-radius: 10px;
+            border: 2px solid;
         }
 
         & h3 {

@@ -10,27 +10,33 @@
 
 .NavLink {
 
-        margin: 10px 5px;
-        padding: 10px 10px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-family: Georgia;
-        color: #ffffff;
-        font-size: 20px;
-        backdrop-filter: blur(10px);
-        background: #2a243838;
-        border: solid #ffffff 2px;
-        text-decoration: none;
+    margin: 10px 5px;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 20px;
+    backdrop-filter: blur(10px);
+    background: #2a243838;
+    border: solid #ffffff 2px;
+    text-decoration: none;
 
-        &:disabled {
-            background: #dbd8e3;
-            color: black;  
-        }
-        
-        &:hover {
-            border: solid #000000 2px;
-            color: black;
-            background: #dbd8e3;
-            text-decoration: none;
-        }
+    &:disabled {
+        background: #dbd8e3;
+        color: black;
+    }
+
+    &:hover {
+        border: solid #000000 2px;
+        color: black;
+        background: #dbd8e3;
+        text-decoration: none;
+    }
+}
+
+.activeButton {
+    background: #dbd8e3;
+    border: solid #000000 2px;
+    color: #000000;
 }

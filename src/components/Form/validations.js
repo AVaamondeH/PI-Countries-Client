@@ -82,6 +82,5 @@ export const validate = (inputName, inputValue, totalValidation, durationData) =
         console.log(inputValue);
     }
 
-
     return errors
 };

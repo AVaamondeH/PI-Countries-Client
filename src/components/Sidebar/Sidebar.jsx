@@ -1,10 +1,9 @@
 import style from './Sidebar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterAndOrder, getActivities, updateFilters, setCurrentPage } from '../../redux/actions';
-import {  useEffect } from "react";
+import { useEffect } from "react";
 
-// eslint-disable-next-line react/prop-types
-function Sidebar () {
+function Sidebar() {
 
     const dispatch = useDispatch()
     const { activities, filters, currentPage } = useSelector(state => state)
@@ -14,9 +13,9 @@ function Sidebar () {
         document.getElementById("continent-select").value = filters.continent;
         document.getElementById("order-select").value = filters.order;
         document.getElementById("activity-select").value = filters.activity;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch])
+
     const handleClick = (event) => {
         const value = event.target.value;
         const name = event.target.name;
@@ -24,9 +23,9 @@ function Sidebar () {
             ...filters,
             [name]: value
         }
-        dispatch(updateFilters(toFilter));  
+        dispatch(updateFilters(toFilter));
         dispatch(setCurrentPage(1))
-        dispatch(()=> filterAndOrder(currentPage, {order: value}));
+        dispatch(() => filterAndOrder(currentPage, { order: value }));
     }
 
     const handleReset = () => {
@@ -35,6 +34,7 @@ function Sidebar () {
             order: 'asc',
             activity: '',
         }
+        dispatch(setCurrentPage(1))
         dispatch(updateFilters(reset))
 
         document.getElementById("continent-select").value = "All";
@@ -42,8 +42,7 @@ function Sidebar () {
         document.getElementById("activity-select").value = "";
     }
 
-
-    return ( 
+    return (
         <>
             <div className={style.container} >
                 <div className={style.sidebar}>
@@ -58,6 +57,7 @@ function Sidebar () {
                         <option value="South America">South America</option>
                         <option value="Oceania">Oceania</option>
                     </select>
+
                     <h3>Order by:</h3>
                     <select name="order" onChange={handleClick} id="order-select">
                         <option value="asc">Ascendant</option>
@@ -65,23 +65,23 @@ function Sidebar () {
                         <option value="Hpopu">Highest Population</option>
                         <option value="Lpopu">Lowest Population</option>
                     </select>
+
                     <h3>Activity:</h3>
                     <select name="activity" onChange={handleClick} id="activity-select">
-                    <option value="" >None</option>
-                    {activities.map(({id, name}) => {
-                        return (
-
-                            <option key={id} value={name}>{name}</option>
-                        )
-                    })}
+                        <option value="" >None</option>
+                        {activities.map(({ id, name }) => {
+                            return (
+                                <option key={id} value={name}>{name}</option>
+                            )
+                        })}
                     </select>
                     <div className={style.reset}>
                         <button onClick={handleReset}>Reset filters</button>
                     </div>
                 </div>
             </div>
-        </> 
-        );
+        </>
+    );
 }
 
 export default Sidebar;
