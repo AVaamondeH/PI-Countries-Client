@@ -1,0 +1,73 @@
+/* Sidebar.module.css */
+.container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 20px;
+    height: 85.7vh;
+    border: 1px solid #ffffff;
+
+    & .sidebar {
+        margin-top: 150px;
+    }
+    & select {
+        margin: 0;
+        width: 15rem;
+        padding: 5px;
+        margin: 5px;
+        font-size: 16px;
+    }
+
+    & h3 {
+        color: #dbd8e3;
+        margin: 10px;
+    }
+
+    .reset {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+
+      & button {
+        margin: 10px 5px;
+        padding: 10px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-family: Georgia;
+        color: #ffffff;
+        font-size: 20px;
+        backdrop-filter: blur(10px);
+        background: #2a243838;
+        border: solid #ffffff 2px;
+        text-decoration: none;
+
+        &:hover {
+          border: solid #000000 2px;
+          color: black;
+          background: #dbd8e3;
+          text-decoration: none;
+      }
+      }
+    }
+
+  }
+  
+  
+  
+  
+  .buttons button {
+    display: flexbox;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #1cc841;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .buttons button:hover {
+    background-color: #0056b3;
+  }
+  

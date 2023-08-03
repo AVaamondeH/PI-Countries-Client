@@ -1,0 +1,76 @@
+/* SearchBar.css */
+.search_container {
+    position: relative;
+    width: 300px; /* Ajusta el tamaño según tus necesidades */
+    text-align: center;
+    margin-bottom: 20px;
+    
+
+    & input {
+      padding: 5px;
+      font-size: 16px;
+      width: 288px;
+      border-radius: 5px;
+    }
+  
+    & .results {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 250px; /* Establece la altura máxima que deseas mostrar */
+      overflow-y: auto; /* Agrega un desplazamiento vertical si hay más de 3 resultados */
+      overflow-x: hidden;
+      position: absolute;
+      background: #dbd8e3;
+      border: 1px solid #ccc;
+      width: 100%;
+      z-index: 1;
+    
+      & li {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+      
+        & a {
+          text-decoration: none;
+          color: #333;
+            &:hover {
+              text-decoration: underline;
+            }
+        }
+      
+        & .divL {
+          position: relative;
+        
+          & img {
+            width: 70px;
+            height: 45px;
+            object-fit: cover;
+            margin-right: 5px;
+            border: 1px solid;
+            
+          }
+        }
+      
+        & .divR {
+          position: relative;
+          font-size: 0.8rem;
+          width: 55%;
+          height: 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        
+            & h3, p{
+              margin: 0;
+            }
+        }
+      }
+    }
+  }
+

@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    & .activities_container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+
+    & .activity_card {
+        width: 200px;
+        height: 170px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+        background-image: linear-gradient(to bottom right, #352f444e, #352f4467);
+        backdrop-filter: blur(10px);
+        color: #dbd8e3;
+        transition: all .2s;
+
+        &:hover {
+            transform: scale(0.99);
+            border-radius: 15px;
+        }
+
+
+
+    }
+
+    & .activity_name {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    & .activity_detail {
+        margin-top: 5px;
+    }
+
+    & .no_activities_message {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    & .delete {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        margin-top: 10px;
+
+        & button {
+
+            margin: 5px 5px;
+            padding: 10px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: Georgia;
+            color: #ffffff;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            background: #2a243838;
+            border: solid #ffffff 2px;
+            text-decoration: none;
+
+            &:disabled {
+                background: #dbd8e3;
+                color: black;
+            }
+
+            &:hover {
+                border: solid #000000 2px;
+                color: black;
+                background: #dbd8e3;
+                text-decoration: none;
+            }
+        }
+    }
+
+}
